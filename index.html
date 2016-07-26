@@ -1,20 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>Pesce's</title>
+        <title>Pesces</title>
 
-    <!-- Bootstrap -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-  </head>
-  <body>
-    <a href = "http://pesces.servebeer.com:23821/web">Plex</a>
-    <a href = "http://pesces.servebeer.com:8112">Deluge</a>
-  </body>
+        <!-- Bootstrap -->
+        <link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">
+        <!-- Custom style -->
+        <link href="css/style.css" type="text/css" rel="stylesheet">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="http://pesces.servebeer.com">Pesces</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="active" id="nav-home"><a href="http://pesces.servebeer.com">Home</a></li>
+                    <li id="nav-media"><a href="http://pesces.servebeer.com/?page=media">Media</a></li>
+                    <li id="nav-admin"><a href="http://pesces.servebeer.com/?page=admin">Admin</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="tiles">
+            <div class="tile media-tile">
+            <a href="http://pesces.servebeer.com:23821/web"><img class="img-responsive" src="resources/plex.jpg"/></a>
+            </div>
+
+            <div class="tile media-tile">
+            <a href="http://pesces.servebeer.com:8112"><img class="img-responsive" src="resources/deluge.png"/></a>
+            </div>
+
+            <div class="tile admin-tile">
+            <a href="http://pesces.servebeer.com:1111"><img class="img-responsive" src="resources/network.jpg"/></a>
+            </div>
+        </div>
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Isotope -->
+        <script src="/js/isotope.pkgd.min.js"></script>
+        <!-- QueryData -->
+        <script type="text/javascript" src="/js/QueryData.js"></script>
+
+        <script>
+            window.onload = function(){
+                document.body.style.visibility='visible';
+                //Show the appropriate tiles based on URL parameters
+                var getData = new QueryData();
+                var page = "*";
+                if('page' in getData) {
+                    page = '.'+getData.page;
+                }
+                $('.tiles').isotope({
+                    itemSelector: '.tile',
+                    layoutMode: 'fitRows',
+                    filter: page
+                });
+            }
+
+            function filter(page) {
+                $('.tiles').isotope({filter: page});
+            }
+
+            function setActive(ele) {
+                $('.nav li.active').removeClass('active');
+                $(ele).addClass('active');
+            }
+
+            $('#nav-media').click(function(e){
+                e.preventDefault();
+                filter('.media-tile');
+                setActive(this);
+            });
+            $('#nav-admin').click(function(e){
+                e.preventDefault();
+                filter('.admin-tile');
+                setActive(this);
+            });
+            $('#nav-home').click(function(e){
+                e.preventDefault();
+                filter('*');
+                setActive(this);
+            });
+        </script>
+    </body>
 </html>
-

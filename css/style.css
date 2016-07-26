@@ -1,0 +1,15 @@
+body {
+    visibility: hidden;
+}
+
+.tile {
+    margin: 5px;
+}
+
+.tile img {
+    max-height: 20vh;
+}
+
+body {
+    background-color: #333333;
+}
