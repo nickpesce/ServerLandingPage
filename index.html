@@ -24,21 +24,25 @@
                     <li class="active" id="nav-home"><a href="http://pesces.servebeer.com">Home</a></li>
                     <li id="nav-media"><a href="http://pesces.servebeer.com/?page=media">Media</a></li>
                     <li id="nav-admin"><a href="http://pesces.servebeer.com/?page=admin">Admin</a></li>
+                    <li id="nav-games"><a href="http://pesces.servebeer.com/?page=games">Games</a></li>
                 </ul>
             </div>
         </nav>
 
         <div class="tiles">
             <div class="tile media-tile">
-            <a href="http://pesces.servebeer.com:23821/web"><img class="img-responsive" src="resources/plex.jpg"/></a>
+                <a href="http://pesces.servebeer.com:23821/web"><img class="img-responsive" src="resources/plex.jpg"/></a>
             </div>
 
             <div class="tile media-tile">
-            <a href="http://pesces.servebeer.com:8112"><img class="img-responsive" src="resources/deluge.png"/></a>
+                <a href="http://pesces.servebeer.com:8112"><img class="img-responsive" src="resources/deluge.png"/></a>
             </div>
 
             <div class="tile admin-tile">
-            <a href="http://pesces.servebeer.com:1111"><img class="img-responsive" src="resources/network.jpg"/></a>
+                <a href="http://pesces.servebeer.com:1111"><img class="img-responsive" src="resources/network.jpg"/></a>
+            </div>
+            <div class="tile game-tile">
+                <a href="http://pesces.servebeer.com:51232"><img class="img-responsive" src="resources/phrasemoji.png"/></a>
             </div>
         </div>
 
@@ -84,6 +88,11 @@
             $('#nav-admin').click(function(e){
                 e.preventDefault();
                 filter('.admin-tile');
+                setActive(this);
+            });
+            $('#nav-games').click(function(e){
+                e.preventDefault();
+                filter('.game-tile');
                 setActive(this);
             });
             $('#nav-home').click(function(e){
