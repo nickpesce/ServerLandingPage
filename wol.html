@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<head>
+    <title>Pesces Wake On Lan</title>
+</head>
+<body>
+    <button id="wol">WAKE</button>
+    <p id="result"></p>
+    <?--Jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $("#wol").click(function() {
+            $.post("/wol", function(data) {
+                $("#result").html(data);
+            });
+        });
+    </script>
+</body>
