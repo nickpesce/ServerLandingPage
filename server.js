@@ -16,6 +16,10 @@ app.get("/", function(req, res) {
 });
 
 app.get("/wol", function(req, res) {
+    res.sendFile("wol.html", {root: __dirname});
+});
+
+app.post("/wol", function(req, res) {
     var credentials = auth(req);
     if (!credentials || credentials.name !== 'wol' || credentials.pass != wolPassword) {
         res.statusCode = 401
