@@ -5,6 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <link rel="icon" href="resources/favicon.ico">
 
         <title>Pesces</title>
 
@@ -18,32 +19,38 @@
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <a class="navbar-brand" href="http://pesces.servebeer.com">Pesces</a>
+                    <a class="navbar-brand" href="http://pesce.host">Pesces</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li class="active" id="nav-home"><a href="http://pesces.servebeer.com">Home</a></li>
-                    <li id="nav-media"><a href="http://pesces.servebeer.com/?page=media">Media</a></li>
-                    <li id="nav-admin"><a href="http://pesces.servebeer.com/?page=admin">Admin</a></li>
-                    <li id="nav-games"><a href="http://pesces.servebeer.com/?page=games">Games</a></li>
+                    <li class="active" id="nav-home"><a href="http://pesce.host">Home</a></li>
+                    <li id="nav-media"><a href="http://pesce.host/?page=media">Media</a></li>
+                    <li id="nav-admin"><a href="http://pesce.host/?page=admin">Admin</a></li>
+                    <li id="nav-games"><a href="http://pesce.host/?page=games">Games</a></li>
                 </ul>
             </div>
         </nav>
 
         <div class="tiles">
-            <div class="tile media-tile">
-                <a href="http://pesces.servebeer.com:23821/web"><img class="img-responsive" src="resources/plex.jpg"/></a>
+            <div class="tile media-tile" data-toggle="tooltip" title="Plex Media Server">
+                <a href="http://plex.pesce.host"><img class="img-responsive" src="resources/plex.jpg"/></a>
             </div>
-            <div class="tile media-tile">
-                <a href="http://pesces.servebeer.com:8112"><img class="img-responsive" src="resources/deluge.png"/></a>
+            <div class="tile media-tile" data-toggle="tooltip" title="Deluge Torrent Server">
+                <a href="http://deluge.pesce.host"><img class="img-responsive" src="resources/deluge.png"/></a>
             </div>
-            <div class="tile admin-tile">
-                <a href="http://pesces.servebeer.com:1111"><img class="img-responsive" src="resources/network.jpg"/></a>
+            <div class="tile admin-tile" data-toggle="tooltip" title="Router Config">
+                <a href="http://admin.pesce.host"><img class="img-responsive" src="resources/network.jpg"/></a>
             </div>
-            <div class="tile admin-tile">
-                <a href="http://pesces.servebeer.com/wol"><img class="img-responsive" src="resources/wol.png"/></a>
+            <div class="tile admin-tile" data-toggle="tooltip" title="Wake On Lan">
+                <a href="http://wol.pesce.host"><img class="img-responsive" src="resources/wol.png"/></a>
             </div>
-            <div class="tile game-tile">
-                <a href="http://pesces.servebeer.com:51232"><img class="img-responsive" src="resources/phrasemoji.png"/></a>
+            <div class="tile admin-tile" data-toggle="tooltip" title="FTP Server">
+                <a href="ftp://pesce.host"><img class="img-responsive" src="resources/ftp.jpeg"/></a>
+            </div>
+            <div class="tile game-tile" data-toggle="tooltip" title="Phrasemoji">
+                <a href="http://phrasemoji.pesce.host"><img class="img-responsive" src="resources/phrasemoji.png"/></a>
+            </div>
+            <div class="tile game-tile" data-toggle="tooltip" title="Super Magical Love Party!">
+                <a href="http://smlp.pesce.host"><img class="img-responsive" src="resources/cupcake.png"/></a>
             </div>
         </div>
 
@@ -70,6 +77,7 @@
                     layoutMode: 'fitRows',
                     filter: page
                 });
+                $('[data-toggle="tooltip"]').tooltip(); 
             }
 
             function filter(page) {

@@ -2,7 +2,6 @@ var express = require("express");
 var exec = require('child_process').exec;
 var app = express();
 var auth = require('basic-auth');
-app.use(express.static(__dirname));
 
 var fs = require('fs');
 var wolPassword;
@@ -16,6 +15,7 @@ app.get("/", function(req, res) {
 });
 
 app.get("/wol", function(req, res) {
+    console.log(req.hostname);
     res.sendFile("wol.html", {root: __dirname});
 });
 
@@ -33,7 +33,7 @@ app.post("/wol", function(req, res) {
   }
 });
 
-var server = app.listen(80, function() {
+app.use(express.static(__dirname));
+var server = app.listen(8080, function() {
     console.log("Server started.");
 });
-
