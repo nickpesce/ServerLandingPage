@@ -4,12 +4,24 @@
 </head>
 <body>
     <button id="wol">WAKE</button>
+    <button id="shutdown">SHUTDOWN</button>
+    <button id="check">CHECK</button>
     <p id="result"></p>
     <?--Jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
         $("#wol").click(function() {
-            $.post("/", function(data) {
+            $.post("/wake", function(data) {
+                $("#result").html(data);
+            });
+        });
+        $("#shutdown").click(function() {
+            $.post("/shutdown", function(data) {
+                $("#result").html(data);
+            });
+        });
+        $("#check").click(function() {
+            $.get("/check", function(data) {
                 $("#result").html(data);
             });
         });

@@ -5,9 +5,14 @@ var auth = require('basic-auth');
 
 var fs = require('fs');
 var wolPassword;
+var shutdownCredentials;
+var shutdownIP;
 fs.readFile(__dirname + '/wol_password.txt', 'utf8', function(err, data) {
     if (err) throw err;
-    wolPassword = data.trim();
+    lines = data.split("\n"); 
+    wolPassword = lines[0];
+    shutdownIP = lines[1];
+    shutdownCredentials = lines[2];
 }); 
 
 app.get("/", function(req, res) {
@@ -15,11 +20,10 @@ app.get("/", function(req, res) {
 });
 
 app.get("/wol", function(req, res) {
-    console.log(req.hostname);
     res.sendFile("wol.html", {root: __dirname});
 });
 
-app.post("/wol", function(req, res) {
+app.post("/wol/wake", function(req, res) {
     var credentials = auth(req);
     if (!credentials || credentials.name !== 'wol' || credentials.pass != wolPassword) {
         res.statusCode = 401
@@ -28,9 +32,43 @@ app.post("/wol", function(req, res) {
     } else {
         var cmd = 'etherwake 14:da:e9:10:53:46';
         exec(cmd, function(error, stdout, stderr) {
+            if(stdout + stderr == "")
+                res.send("The computer has been woken!");
+            else
+                res.send(stdout + stderr);
     });
-    res.end('Computer has been woken.')
   }
+});
+
+app.post("/wol/shutdown", function(req, res) {
+    var credentials = auth(req);
+    if (!credentials || credentials.name !== 'wol' || credentials.pass != wolPassword) {
+        res.statusCode = 401
+        res.setHeader('WWW-Authenticate', 'Basic realm="WOL"')
+        res.end('Access denied')
+    } else {
+        var cmd = 'net rpc shutdown -I ' + shutdownIP + ' -U ' + shutdownCredentials;
+        exec(cmd, function(error, stdout, stderr) {
+            res.end(stdout + stderr);
+    });
+  }
+});
+
+app.get("/wol/check", function(req, res) {
+    var credentials = auth(req);
+    if (!credentials || credentials.name !== 'wol' || credentials.pass != wolPassword) {
+        res.statusCode = 401
+        res.setHeader('WWW-Authenticate', 'Basic realm="WOL"')
+        res.end('Access denied')
+    } else {
+        var cmd = 'ping ' + shutdownIP + ' -c 1';
+        exec(cmd, function(error, stdout, stderr) {
+            if(error == null)
+                res.send("The computer is on.");
+            else
+                res.send("The computer is off.");
+        });
+    }
 });
 
 app.use(express.static(__dirname));
