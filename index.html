@@ -23,7 +23,9 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li class="active" id="nav-home"><a href="http://pesce.host">Home</a></li>
+                    <li id="nav-people"><a href="http://pesce.host/?page=people">People</a></li>
                     <li id="nav-media"><a href="http://pesce.host/?page=media">Media</a></li>
+                    <li id="nav-productivity"><a href="http://pesce.host/?page=productivity">Productivity</a></li>
                     <li id="nav-admin"><a href="http://pesce.host/?page=admin">Admin</a></li>
                     <li id="nav-games"><a href="http://pesce.host/?page=games">Games</a></li>
                 </ul>
@@ -31,6 +33,9 @@
         </nav>
 
         <div class="tiles">
+            <div class="tile people-tile" data-toggle="tooltip" title="Nick Pesce">
+                <a href="http://nick.pesce.host"><img class="img-responsive" src="resources/8bitNick.png"/></a>
+            </div>
             <div class="tile media-tile" data-toggle="tooltip" title="Plex Media Server">
                 <a href="http://plex.pesce.host"><img class="img-responsive" src="resources/plex.jpg"/></a>
             </div>
@@ -51,6 +56,9 @@
             </div>
             <div class="tile game-tile" data-toggle="tooltip" title="Super Magical Love Party!">
                 <a href="http://smlp.pesce.host"><img class="img-responsive" src="resources/cupcake.png"/></a>
+            </div>
+            <div class="tile productivity-tile" data-toggle="tooltip" title="Jupyter Notebook">
+                <a href="http://notebook.pesce.host"><img class="img-responsive" src="resources/notebook.png"/></a>
             </div>
         </div>
 
@@ -89,9 +97,19 @@
                 $(ele).addClass('active');
             }
 
+            $('#nav-people').click(function(e){
+                e.preventDefault();
+                filter('.people-tile');
+                setActive(this);
+            });
             $('#nav-media').click(function(e){
                 e.preventDefault();
                 filter('.media-tile');
+                setActive(this);
+            });
+            $('#nav-productivity').click(function(e){
+                e.preventDefault();
+                filter('.productivity-tile');
                 setActive(this);
             });
             $('#nav-admin').click(function(e){
